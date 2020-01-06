@@ -8,10 +8,13 @@ function  bubbleSort ($arr)
     $cou = count($arr);
     if ($cou < 2) return $arr;
 
+    // 如果是六个数字，则执行五组排列就可以了
     for ($i = 0; $i < $cou-1; $i++) {
-        $flag = false; // 是否发生过交换，默认没有发生交换
+        // 是否发生过交换，默认没有发生交换
+        $flag = false;
         for ($j = 1; $j < $cou-$i; $j++) {
-            if ($arr[$j-1] > $arr[$j]) { // 上面的$j从1开始，所以这使用 $j-1 索引
+            // 上面的$j从1开始，所以这使用 $j-1 索引
+            if ($arr[$j-1] > $arr[$j]) {
                 $temp = $arr[$j];
                 $arr[$j] = $arr[$j-1];
                 $arr[$j-1] = $temp;
