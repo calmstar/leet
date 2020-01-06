@@ -11,7 +11,7 @@ function  bubbleSort ($arr)
     for ($i = 0; $i < $cou-1; $i++) {
         $flag = false; // 是否发生过交换，默认没有发生交换
         for ($j = 1; $j < $cou-$i; $j++) {
-            if ($arr[$j-1] > $arr[$j]) {
+            if ($arr[$j-1] > $arr[$j]) { // 上面的$j从1开始，所以这使用 $j-1 索引
                 $temp = $arr[$j];
                 $arr[$j] = $arr[$j-1];
                 $arr[$j-1] = $temp;
