@@ -8,7 +8,7 @@ function  bubbleSort ($arr)
     $cou = count($arr);
     if ($cou < 2) return $arr;
 
-    // 如果是六个数字，则执行五组排列就可以了
+    // 如果是六个数字，则执行五组比较就可以了
     for ($i = 0; $i < $cou-1; $i++) {
         // 是否发生过交换，默认没有发生交换
         $flag = false;
