@@ -42,6 +42,41 @@ class Solution {
      * @return Boolean
      */
     function isValid($s) {
+        $len = strlen($s);
+        if ($len == 1)  return false;
 
+        $left = array('(', '{', '[');
+        $map = ['(' => ')', '{' => '}', '[' => ']'];
+        $stack = [];
+
+        // 默认都匹配正确
+        $flag = true;
+
+        for ($i = 0; $i < $len; $i++) {
+            if (in_array($s[$i], $left)) {
+                // 压入栈中
+                array_push($stack, $s[$i]);
+            } else {
+                // 取出栈中元素
+                $res = $map[array_pop($stack)] == $s[$i] ? true : false;
+                if (!$res) {
+                    $flag = false;
+                    break;
+                }
+            }
+        }
+
+        if ($flag && empty($stack)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
+
+
+$solu = new Solution();
+//$s = '()[]{}';
+$s = "((";
+$s = "(";
+var_dump($solu->isValid($s));
