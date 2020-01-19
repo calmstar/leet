@@ -10,7 +10,7 @@ function selectSort ($arr)
     $cou = count($arr);
     if ($cou < 2) return $arr;
 
-    // 如果是六个数字，选择五次最大的数放在右边，即可
+    // 如果是六个数字，选择五次最大的数放在右边，即可。执行五组比较即可
     for ($i = 0; $i < $cou-1; $i++) {
         // 假设最大的数的索引是0
         $max = $arr[0];

@@ -14,7 +14,7 @@ function  bubbleSort ($arr)
         $flag = false;
         for ($j = 1; $j < $cou-$i; $j++) {
             // 上面的$j从1开始，所以这使用 $j-1 索引
-            if ($arr[$j-1] > $arr[$j]) {
+            if ($arr[$j-1] > $arr[$j]) { // 前面一个数字比后面一个大，则进行交换
                 $temp = $arr[$j];
                 $arr[$j] = $arr[$j-1];
                 $arr[$j-1] = $temp;
