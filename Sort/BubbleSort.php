@@ -1,7 +1,9 @@
 <?php
 /**
- *
+ * 冒泡排序
+ * 将数字大的冒泡 -- 交换放在最右边
  * @param $arr
+ * @return mixed
  */
 function  bubbleSort ($arr)
 {
