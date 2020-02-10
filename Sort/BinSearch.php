@@ -18,7 +18,9 @@ function binSearch ($arr, $target)
 
     $low = 0;
     $heigh = $num - 1;
+    // 当low 都大于 height 时，就跳出了循环
     while ($low <= $heigh) {
+        // 使用ceil，进一法。因为low和height用的是数组索引，比真实长度少1
         $mid = (int)ceil(($low + $heigh) / 2);
         if ($arr[$mid] == $target) {
             return $mid;
