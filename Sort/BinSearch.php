@@ -7,6 +7,7 @@
  */
 
 /**
+ * 二分查找
  * @param $arr
  * @param $target
  * @return int
