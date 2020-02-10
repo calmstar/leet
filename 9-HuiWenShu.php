@@ -46,4 +46,4 @@ function isPalindrome($x) {
     }
 }
 
-var_dump(solve(-121));
+var_dump(isPalindrome(-121));
