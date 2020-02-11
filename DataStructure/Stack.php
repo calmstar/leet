@@ -138,5 +138,5 @@ $books = new SplStack();
 $books->push("111");
 $books->push("222");
 $books->push("333");
-echo $books->pop() . "\n";
-echo $books->top() . "\n";
+echo $books->pop() . "\n"; // 333
+echo $books->pop() . "\n"; // 222
