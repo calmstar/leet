@@ -97,9 +97,9 @@ echo "栈的长度为:".$stack->getSize()."\n";
 
 /**
  * 方式二：使用php内置函数：array_push(),array_pop(),array_unshift(),array_shift()
- * https://www.cnblogs.com/clubs/p/11949578.html
+ * https://www.cnblogs.com/clubs/p/11949578.html(此链接关于队列的描述举例错误了)
  */
-echo  "===== 方式二 =====\n";
+echo  "===== 方式二.1 =====\n";
 $rangeList = array("淘宝", "天猫", " VIP");
 //入栈
 array_push($rangeList, "拼多多");
@@ -112,6 +112,22 @@ var_dump($result);
 $result = array_pop($rangeList);//拼多多
 var_dump($result);
 
+/**
+ * 上面是使用 array_push和 array_pop 对数组索引尾部使用;
+ * 也可以使用 array_shift  和 array_unshift 对数组索引头部进行使用；
+ * 无论是头部还是尾部，都是一个相对的概念，只要能够满足 先进后出 的特点就是栈
+ */
+echo  "===== 方式二.2 =====\n";
+$stack = array("三星", "LG", "惠而浦");
+//入队
+array_unshift($stack, "海信");
+array_unshift($stack, "科龙");
+var_dump($stack); //array(5) { [0]=> string(6) "科龙" [1]=> string(6) "海信" [2]=> string(6) "三星" [3]=> string(2) "LG" [4]=> string(9) "惠而浦" }
+//出队
+$res = array_shift($stack);//科龙
+var_dump($res);
+$res = array_shift($stack);//海信
+var_dump($res);
 
 /**
  * 方式二：使用 SplStack 类 实现栈
