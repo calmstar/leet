@@ -25,5 +25,6 @@
  */
 function heapSort ($arr)
 {
+    // 需要结合heap本身的结构写，所以查看 DataStructure/Heap.php 下的 heapSort 方法；
     return $arr;
 }

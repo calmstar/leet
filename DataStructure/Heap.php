@@ -37,11 +37,33 @@ function main ()
 {
     // 根据上面的二叉树元素位置，依次存储到数组中，从上到下，从左到右
     $arr = [4, 10, 3, 5, 1, 9];
-    $arr = buildHeap($arr);
+//    $arr = buildHeap($arr);
+    $arr = heapSort($arr);
     var_dump($arr);
 }
 
 /**
+ * 堆排序
+ * @param $arr
+ * @return mixed
+ */
+function heapSort ($arr) {
+    // 得到一个符合 堆结构存储 的数组
+    $arr = buildHeap($arr);
+    $cou = count($arr);
+    $sortedArr = []; //前面得到大顶堆，后面拿出来就是逆序排列的数字
+    for ($i = $cou - 1; $i >= 0; $i--) {
+        $sortedArr[] = $arr[0]; // 将祖先节点（大顶堆为最大的数）放到已排序好的数组中
+        swap($arr, $i, 0); // 将祖先节点跟最后的叶子节点交换
+        unset($arr[$i]); // 防止影响 $cou
+        heapify($arr, 0); // 取了0位置的数，就重新构造大顶堆；虽然heapify只构造一边，但是仍然可以，因为$arr本身其他的边就被构造好了
+    }
+    return $sortedArr;
+}
+
+/**
+ * 建立一个完整的堆，大顶堆
+ *
  *  倒序堆化的顺序： 3 -> 10 -> 4
  *    开始：  4       父节点3进行堆化 ：  4      父节点10进行堆化 ：  4    父节点4进行堆化① ： 10   父节点4进行堆化② ：  10
  *         /   \                    /   \                    /   \                  /   \                    /   \
@@ -86,10 +108,10 @@ function heapify (&$arr, $index)
     $maxIndex = $index;
 
     // 假设索引i为当前这棵二叉树的父元素，依次跟左右两个子节点进行比较，得到该棵树最大的元素索引，然后替换值到父节点上
-    if ($leftChild <= $cou &&$arr[$leftChild] > $arr[$maxIndex]) {
+    if ($leftChild < $cou && $arr[$leftChild] > $arr[$maxIndex]) {
         $maxIndex = $leftChild;
     }
-    if ($rightChild <= $cou && $arr[$rightChild] > $arr[$maxIndex]) {
+    if ($rightChild < $cou && $arr[$rightChild] > $arr[$maxIndex]) {
         $maxIndex = $rightChild;
     }
     if ($maxIndex != $index) {
