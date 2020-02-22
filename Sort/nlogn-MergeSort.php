@@ -30,6 +30,7 @@ function mergeSort($arr) {
 }
 
 // merge函数将指定的两个有序数组(arrA, arr)合并并且排序
+// 分治+合并
 function merge($arrA, $arrB) {
     $arrC = array();
     while (count($arrA) && count($arrB)) {
