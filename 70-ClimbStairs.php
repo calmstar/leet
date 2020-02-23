@@ -38,6 +38,8 @@ class Solution {
 
     /**
      * 递归解法，当 n=46 时，结果会溢出。
+     * 时间复杂度 2的n次方（递归在该方法体使用了两次，相当于二叉树，树高n-1）
+     *
      * @param Integer $n
      * @return Integer
      */
@@ -64,6 +66,9 @@ class Solution {
 
     /**
      * 循环解法
+     * 时间复杂度为 n.
+     * 比递归稍微难理解，但是时间复杂度低
+     *
      * @param $n
      * @return int
      */
@@ -83,12 +88,71 @@ class Solution {
         return $current;
     }
 
+    /**
+     * 动态规划
+     * 参考资料：https://mp.weixin.qq.com/s/3h9iqU4rdH3EIy5m6AzXsg
+     *
+     * @param $n
+     * @return mixed
+     */
     function climbStairsDynamic ($n)
     {
-
+        // 其实就是上面的 climbStairsFor 方法
+        // 动态规划：利用简洁的自底向上的递推方式，实现空间和时间的优化
     }
+
+    /**
+     * 备忘录算法
+     * 资料：https://mp.weixin.qq.com/s/3h9iqU4rdH3EIy5m6AzXsg
+     *
+     * 在递归法基础上做的升级，时间复杂度为 O(n),因为总共n个输入，会有 n-2个命中备忘录结果。
+     * 由于引入了类似缓存，所以也可以解决 n=46 时，栈溢出问题
+     *
+     * @param $n
+     * @return int
+     */
+    public $history = [];
+    function climbStairsMemo($n)
+    {
+        if ($n == 1) return 1;
+        if ($n == 2) return 2;
+
+        // 使用全局变量，避免栈递归调用时，变量互相隔离
+        if (isset($this->history[$n])) {
+            $value = $this->history[$n];
+        } else {
+            $value = $this->climbStairsMemo($n-1) + $this->climbStairsMemo($n-2);
+            $this->history[$n] = $value;
+        }
+        return $value;
+    }
+
+    // 备忘录算法错误测试：忽略了栈调用时，每次递归的各个变量都是相互隔离的
+    function climbStairsMemov($n)
+    {
+        if ($n == 1) return 1;
+        if ($n == 2) return 2;
+
+        if (!isset($history) || !is_array($history)) {
+            echo 'u'; // u的数量跟t一致
+            $history = [];
+        }
+        if (isset($history[$n])) {
+            //永远不会打印出r。因为$history只是一个局部变量，递归调用此函数，每个递归内的变量都是互不干扰的
+            echo 'r';
+            $value = $history[$n];
+        } else {
+            echo 't';
+            $value = $this->climbStairsMemov($n-1) + $this->climbStairsMemov($n-2);
+            $history[$n] = $value;
+        }
+        return $value;
+    }
+
 }
 $s = new Solution();
 echo "递归：" . $s->climbStairs(4) . "\n";
 echo "循环：" . $s->climbStairsFor(4) . "\n";
 echo "动态规划：" . $s->climbStairsDynamic(4) . "\n";
+echo "备忘录算法：" . $s->climbStairsMemo(46) . "\n";
+echo "备忘录算法2：" . $s->climbStairsMemov(10) . "\n";
