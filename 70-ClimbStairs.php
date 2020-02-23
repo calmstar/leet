@@ -102,7 +102,7 @@ class Solution {
     }
 
     /**
-     * 备忘录算法
+     * 备忘录算法1
      * 资料：https://mp.weixin.qq.com/s/3h9iqU4rdH3EIy5m6AzXsg
      *
      * 在递归法基础上做的升级，时间复杂度为 O(n),因为总共n个输入，会有 n-2个命中备忘录结果。
@@ -127,26 +127,80 @@ class Solution {
         return $value;
     }
 
-    // 备忘录算法错误测试：忽略了栈调用时，每次递归的各个变量都是相互隔离的
+    /**
+     * 备忘录算法2：
+     * 错误测试：忽略了栈调用时，每次递归的各个变量都是相互隔离的
+     * @param $n
+     * @return int|mixed
+     */
     function climbStairsMemov($n)
     {
         if ($n == 1) return 1;
         if ($n == 2) return 2;
 
         if (!isset($history) || !is_array($history)) {
-            echo 'u'; // u的数量跟t一致
+//            echo 'u'; // u的数量跟t一致
             $history = [];
         }
         if (isset($history[$n])) {
             //永远不会打印出r。因为$history只是一个局部变量，递归调用此函数，每个递归内的变量都是互不干扰的
-            echo 'r';
+//            echo 'r';
             $value = $history[$n];
         } else {
-            echo 't';
+//            echo 't';
             $value = $this->climbStairsMemov($n-1) + $this->climbStairsMemov($n-2);
             $history[$n] = $value;
         }
         return $value;
+    }
+
+    /**
+     * 备忘录算法3
+     *
+     * 使用 static ,就可以让变量跳出栈递归的局部比哪里隔离，成为类似全局变量的静态变量
+     * 因为静态变量实在 静态区存储的，而不是栈区。
+     *
+     * @param $n
+     * @return int|mixed
+     */
+    function climbStairsMemov3($n)
+    {
+        if ($n == 1) return 1;
+        if ($n == 2) return 2;
+        static $history = [];
+        // 使用全局变量，避免栈递归调用时，变量互相隔离
+        if (isset($history[$n])) {
+            $value = $history[$n];
+        } else {
+            $value = $this->climbStairsMemov3($n-1) + $this->climbStairsMemov3($n-2);
+            $history[$n] = $value;
+        }
+        var_dump($history);
+        return $value;
+    }
+
+    // 针对v3备忘录策略的优化 -- 最细化的缓存策略 -- 当 n=4 时，v3不能命中缓存，v4可以命中1个
+    function climbStairsMemov4 ($n)
+    {
+        if ($n == 1) return 1;
+        if ($n == 2) return 2;
+        static $history = [];
+
+        if (isset($history[$n-1])) {
+            echo 'r';
+            $value1 = $history[$n-1];
+        } else {
+            $value1 = $this->climbStairsMemov4($n-1);
+            $history[$n-1] = $value1;
+        }
+        if (isset($history[$n-2])) {
+            $value2 = $history[$n-2];
+            echo '命中：p' . $value2 . 'n' . $n;
+        } else {
+            $value2 = $this->climbStairsMemov4($n-2);
+            $history[$n-2] = $value2;
+        }
+        return $value1 + $value2;
     }
 
 }
@@ -156,3 +210,5 @@ echo "循环：" . $s->climbStairsFor(4) . "\n";
 echo "动态规划：" . $s->climbStairsDynamic(4) . "\n";
 echo "备忘录算法：" . $s->climbStairsMemo(46) . "\n";
 echo "备忘录算法2：" . $s->climbStairsMemov(10) . "\n";
+echo "备忘录算法3：" . $s->climbStairsMemov3(4) . "\n";
+echo "备忘录算法4：" . $s->climbStairsMemov4(4) . "\n";
