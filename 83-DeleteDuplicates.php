@@ -75,7 +75,7 @@ class Solution {
     function deleteDuplicatesV2($head) {
         $curr = $head;
         while($curr!=null && $curr->next!=null){
-            if($curr->val==$curr->next->val){
+            if($curr->val==$curr->next->val){ // 因为是排序链表，所以可以这样
                 $curr->next = $curr->next->next;
             }else{
                 $curr = $curr->next;
