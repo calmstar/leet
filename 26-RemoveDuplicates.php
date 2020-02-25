@@ -46,7 +46,30 @@ for (int i = 0; i < len; i++) {
 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-function removeDuplicates ()
-{
+class Solution {
 
+    /**
+     * 1 将数组的一个元素与后一个元素相比较，如果一样，则记录该数组的索引
+        2 将要去处的数组索引遍历unset
+     * @param Integer[] $nums
+     * @return Integer
+     */
+    function removeDuplicates(&$nums) {
+        // [1,1,2]
+        $num = count($nums);
+        $unsetIndexArr = [];
+        for ($i = 0; $i < $num; $i++) {
+            if ($i+1 >= $num) break;
+            if ($nums[$i] == $nums[$i+1]) {
+                $unsetIndexArr[] = $i+1;
+            }
+        }
+        foreach ($unsetIndexArr as $v) {
+            unset($nums[$v]);
+        }
+        return count($nums);
+    }
 }
+$arr = [1,1,2];
+$s = new Solution();
+var_dump($s->removeDuplicates($arr));
