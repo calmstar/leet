@@ -57,10 +57,12 @@ class Solution {
     function removeDuplicates(&$nums) {
         // [1,1,2]
         $num = count($nums);
+        if ($num <= 1) return $num;
+
         $unsetIndexArr = [];
         for ($i = 0; $i < $num; $i++) {
             if ($i+1 >= $num) break;
-            if ($nums[$i] == $nums[$i+1]) {
+            if ($nums[$i] == $nums[$i+1]) { // 题意为有序数组
                 $unsetIndexArr[] = $i+1;
             }
         }
@@ -69,7 +71,39 @@ class Solution {
         }
         return count($nums);
     }
+
+    /**
+     * leetcode 官方双指针用法
+     * @param $nums
+     * @return int
+     */
+    function removeDuplicatesOfficial (&$nums)
+    {
+        // [1,1,2]
+        $num = count($nums);
+        if ($num <= 1) return $num;
+
+        // $j慢指针，指向不重复的数据；$i为快指针，指向全体数据
+        $j = 0;
+        for ($i = 1; $i < $num; $i++) {
+            if ($nums[$j] != $nums[$i]) { // 题意:有序数组
+                // 不等，则慢指针偏移。将快指针的数据，拷贝到下一个慢指针的数据（不重复）
+                $j++;
+                $nums[$j] = $nums[$i]; // 题意:你不需要考虑数组中超出新长度后面的元素
+            } else {
+                // 相等，则慢指针不偏移。
+                // 快指针跳过该重复的元素
+                continue;
+            }
+        }
+        return $j+1;
+    }
 }
 $arr = [1,1,2];
 $s = new Solution();
+
+echo "我的解法\n";
 var_dump($s->removeDuplicates($arr));
+
+echo "官方解法\n";
+var_dump($s->removeDuplicatesOfficial($arr));
