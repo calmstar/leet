@@ -25,7 +25,7 @@ function fibonacci ($n)
 {
     if ($n == 1 || $n == 2) return 1;
     return fibonacci($n-1) + fibonacci($n-2);
-    // 使用递归会出现很多重叠子问题（O(n的2次方)），可用备忘录算法（O(n),leetcode-70）
+    // 使用递归会出现很多重叠子问题（O(2的n次方)），可用备忘录算法（O(n),leetcode-70）
 }
 
 /**
