@@ -7,6 +7,9 @@
  */
 
 /**
+ * 与 leetcode 70-climbstairs 类似
+ *
+ *
  * 斐波那契数列
  * 斐波那契数列指的是这样一个数列 1, 1, 2, 3, 5, 8, 13, 21, 34......
 从上面数列中可以看到，从第3项开始，每一项都等于前两项之和。
@@ -22,6 +25,7 @@ function fibonacci ($n)
 {
     if ($n == 1 || $n == 2) return 1;
     return fibonacci($n-1) + fibonacci($n-2);
+    // 使用递归会出现很多重叠子问题（O(n的2次方)），可用备忘录算法（O(n),leetcode-70）
 }
 
 /**
