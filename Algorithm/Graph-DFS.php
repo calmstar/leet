@@ -39,7 +39,7 @@ function DFS ($graph, $start)
         $neighborPoint = $graph[$point];
         foreach ($neighborPoint as $v) {
             if (!in_array($v, $dealed)) {
-                array_push($stack, $v);
+                array_push($stack, $v);  // 跟 bfs 的区别就是: 这里使用的是push, bfs用的是 array_unshift
                 array_push($dealed, $v);
             }
         }
