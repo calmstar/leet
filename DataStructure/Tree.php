@@ -6,6 +6,25 @@
  * Time: 15:31
  */
 
+
+/**
+ *如何遍历一棵树
+有两种通用的遍历树的策略：
+
+深度优先搜索（DFS）
+    在这个策略中，我们采用深度作为优先级，以便从跟开始一直到达某个确定的叶子，然后再返回根到达另一个分支。
+    深度优先搜索策略又可以根据根节点、左孩子和右孩子的相对顺序被细分为先序遍历，中序遍历和后序遍历。
+
+宽度优先搜索（BFS）
+    我们按照高度顺序一层一层的访问整棵树，高层次的节点将会比低层次的节点先被访问到。
+
+作者：LeetCode
+链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/er-cha-shu-de-ceng-ci-bian-li-by-leetcode/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ */
+
+
 /**
  *
  * 视频资料：https://www.bilibili.com/video/av10472337
