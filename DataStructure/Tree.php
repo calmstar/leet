@@ -134,4 +134,20 @@ function postOrder (Node $node) {
     }
 }
 
+/**
+ * BFS 搜索 ，借助队列完成. 为层次遍历
+ * （DFS搜索就为前、中、后序遍历）
+ * @param Node $node
+ */
+function BFS (Node $node)
+{
+    $queue = [$node]; // 把整个节点存入，方便更新节点
+    while (!empty($queue)) {
+        $node = array_pop($queue); // 从队头取出元素
+        echo $node->data . " "; // 4 10 3 5 1 2
+        $node->left && array_unshift($queue, $node->left); // 从队尾补充元素
+        $node->right && array_unshift($queue, $node->right); // 从队尾补充元素
+    }
+}
+
 main();
