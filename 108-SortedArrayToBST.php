@@ -85,6 +85,7 @@ class Solution {
         $mid = floor(count($arr)/2);
         $this->midArr[] = $arr[$mid];
 
+        // 也可以使用改变 left 和 right 索引的方式，动态得到中间索引。
         $left = array_slice($arr, 0, $mid);
         $right = array_slice($arr, $mid+1); // 注意$mid+1，才能去掉$mid本身
         $this->getMidArr($left);
@@ -144,3 +145,32 @@ $tree = $s->sortedArrayToBST($arr);
 $s->BFS($tree);
 
 
+// 官方解法
+class SolutionOfficial {
+    private $nums;
+
+    function sortedArrayToBST($nums)
+    {
+        $this->nums = $nums;
+        return $this->helper(0, count($nums)-1);
+    }
+
+    private function helper ($left, $right)
+    {
+        // 因为要构成二叉搜索树，且子树之间的高度差不能大于1
+        // 又因为数组 $nums 为有序数组，所以每次对半得到中间索引的数组元素插入树中即可
+        if ($left > $right) return null;
+
+        $mid = intval(($left + $right)/2 );
+
+        $node = new TreeNode($this->nums[$mid]);
+        $node->left = $this->helper($left, $mid-1); // 数组左边的数字本来就比中间索引的小，递归放入即可
+        $node->right = $this->helper($mid+1, $right);
+        return $node;
+    }
+}
+echo "=== 我的解法 ==\n";
+$arr = [-10,-3,0,5,9];
+$ss = new SolutionOfficial();
+$res = $ss->sortedArrayToBST($arr);
+var_dump($res);
