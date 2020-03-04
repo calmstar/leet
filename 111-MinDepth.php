@@ -59,4 +59,31 @@ class Solution {
     }
 
 
+    // 官方广度优先搜索 -- 借助队列
+    function minDepthOfficial ($root)
+    {
+        if ($root == null) return 0;
+        if ($root->left == null && $root->right == null) return 1;
+        $arr = [];
+        $minDepth = 0;
+        array_push($arr, $root); // [$root],把第一个节点放进队列中
+
+        while ($cou = count($arr)) { //$cou 代表队列中含有的节点个数
+            $minDepth++;
+
+            // 把该层的所有节点拿出来循环
+            for ($i = $cou; $i > 0; $i--) {
+                $node = array_shift($arr); // 将节点个数依次拿出来
+
+                // 由于层次遍历，所以遇到的第一个节点没有左右子节点，则最小深度就在此， 所以跳出两层循环
+                if ($node->left == null && $node->right == null) break 2;
+
+                // 依次把该节点的左右子节点放进 队列中
+                $node->left && array_push($arr, $node->left);
+                $node->right && array_push($arr, $node->right);
+            }
+        }
+        return $minDepth;
+    }
+
 }
