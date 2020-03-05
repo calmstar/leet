@@ -135,7 +135,7 @@ function postOrder (Node $node) {
 }
 
 /**
- * BFS 搜索 ，借助队列完成. 为层次遍历
+ * 树的 BFS 搜索 ，借助队列完成. 为层次遍历
  * （DFS搜索就为前、中、后序遍历）
  * @param Node $node
  */
@@ -147,6 +147,23 @@ function BFS (Node $node)
         echo $node->data . " "; // 4 10 3 5 1 2
         $node->left && array_unshift($queue, $node->left); // 从队尾补充元素
         $node->right && array_unshift($queue, $node->right); // 从队尾补充元素
+    }
+}
+
+/*
+ * 树的遍历 -- DFS -- 上面的都是使用递归，这里使用 栈 这种数据结构
+ * 借助栈的深度优先遍历
+ */
+function preOrderStack ($root)
+{
+    if ($root == null) return ;
+    $arr = [];
+    array_push($arr, $root);
+    while ($cou = count($arr)) {
+        $node = array_pop($arr);
+        echo $node->val;
+        $node->right && array_push($arr, $node->right);
+        $node->left && array_push($arr, $node->left); // 先进后出，现在为中序遍历
     }
 }
 
