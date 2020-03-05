@@ -51,6 +51,10 @@ class Solution {
             if (isset($arr[$key])) $arr[$key]--;
         }
         return true;
+    }
 
+    function solveGod ($s, $t)
+    {
+        return count_chars($s, 1) == count_chars($t, 1);
     }
 }
