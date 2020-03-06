@@ -54,16 +54,14 @@ function countSort ($arr, $min, $max)
         }
     }
 
-    $newArr = [];
+    $z = 0;
     for ($i = $min; $i <= $max; $i++) {
         if (!isset($countArr[$i])) continue; // 由于上面只初始化了 $min-$max 的部分数据，所以要加个判断
-        $num = $countArr[$i]; // 该值的数量多少
-        while ($num) {
-            $newArr[] = $i;
-            $num--;
+        while ($countArr[$i]-- > 0) {
+            $arr[$z++] = $i; // 继续使用 $arr , 减少内存空间开销
         }
     }
-    return $newArr;
+    return $arr;
 }
 var_dump(countSort($arr,22, 37));
 
