@@ -7,6 +7,48 @@
  */
 
 
+// 对数组进行排序
+//$arr = [1,3,3,2];
+$arr = [30, 22, 37, 22];
+/**
+ * 计数排序：适用于数据量大，但取值范围小的数组
+ *
+ * 计数排序的两个问题：
+ *              1 开始索引距离0很远 -- 在PHP中不存在这种情况，因为PHP的数组可以不从0开始，本质是哈希表。（其他语言，可以用偏移量解决）
+ *              2 不是稳定的排序（原地排序）
+ *
+ * @param $arr
+ * @param $min
+ * @param $max
+ * @return mixed
+ */
+function countSort ($arr, $min, $max)
+{
+    $countArr = [];
+    foreach ($arr as $k => $v) {
+        if (!isset($countArr[$v])) {
+            $countArr[$v] = 1; // 将要排序数组的值，当作key，存入计数数组中，并记录出现的次数
+        } else {
+            $countArr[$v]++;
+        }
+    }
+
+    $z = 0;
+    for ($i = $min; $i <= $max; $i++) {
+        if (!isset($countArr[$i])) continue; // 由于上面只初始化了 $min-$max 的部分数据，所以要加个判断
+        while ($countArr[$i]-- > 0) {
+            $arr[$z++] = $i; // 继续使用 $arr , 减少内存空间开销
+        }
+    }
+    return $arr;
+}
+var_dump(countSort($arr,22, 37));
+
+
+
+echo "\n========== 以上为练习，下面范例 ===== \n\n" ;
+
+
 /**
  * 计数排序：适用于数据量大，但取值范围小的数组
  * @param $my_array
@@ -38,30 +80,4 @@ echo implode(', ', $test_array);
 echo "\n排序后数组:\n";
 echo implode(', ', counting_sort($test_array, -1, 5)) . PHP_EOL;
 
-
-echo "\n========== 以上为范例，下面练习 ===== \n\n" ;
-// 对数组进行排序
-//$arr = [1,3,3,2];
-$arr = [30, 22, 37, 22];
-function countSort ($arr, $min, $max)
-{
-    $countArr = [];
-    foreach ($arr as $k => $v) {
-        if (!isset($countArr[$v])) {
-            $countArr[$v] = 1; // 将要排序数组的值，当作key，存入计数数组中，并记录出现的次数
-        } else {
-            $countArr[$v]++;
-        }
-    }
-
-    $z = 0;
-    for ($i = $min; $i <= $max; $i++) {
-        if (!isset($countArr[$i])) continue; // 由于上面只初始化了 $min-$max 的部分数据，所以要加个判断
-        while ($countArr[$i]-- > 0) {
-            $arr[$z++] = $i; // 继续使用 $arr , 减少内存空间开销
-        }
-    }
-    return $arr;
-}
-var_dump(countSort($arr,22, 37));
 
