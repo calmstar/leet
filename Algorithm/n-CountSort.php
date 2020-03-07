@@ -71,10 +71,13 @@ function countSortStable ($arr, $min, $max)
         }
     }
 
-    // 将计数数组相邻的两个数值相加：$i = $i + ($i-1)， 得到累加数组
+    // $countArr 里的key顺序决定放数字的顺序。因为上面是通过foreach,所以key可能不是按照顺序来，需要先排好序
+    ksort($countArr);
+    $temp = 0;
     foreach ($countArr as $k => $v) {
-        if (!isset($countArr[$k-1])) continue; // 第一位无法减一后，无key对应
-        $countArr[$k] = $countArr[$k-1] + $countArr[$k];
+//        if (!isset($countArr[$k-1])) continue; // 不能是 $k-1， 因为$k可能不是连续的（像3，4，6）
+        $countArr[$k] += $temp;
+        $temp = $countArr[$k];
     }
 
     // 将 累加数组 进行运用
