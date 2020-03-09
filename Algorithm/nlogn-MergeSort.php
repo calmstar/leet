@@ -20,7 +20,7 @@ function mergeSort($arr) {
     }
 
     $mid = intval($len / 2); // 取数组中间
-    $left = array_slice($arr, 0, $mid); // 拆分数组0-mid这部分给左边left
+    $left = array_slice($arr, 0, $mid); // 拆分数组0-mid这部分给左边left. 左开右闭
     $right = array_slice($arr, $mid); // 拆分数组mid-末尾这部分给右边right
     $left = mergeSort($left); // 左边拆分完后开始递归合并往上走
     $right = mergeSort($right); // 右边拆分完毕开始递归往上走

@@ -42,7 +42,7 @@ class Solution {
      */
     function lengthOfLongestSubstring($s) {
         if (strlen($s) == 0) return 0;
-        $arr = str_split($s); // 把字符串切割为数组
+        $arr = str_split($s); // 把字符串切割为数组；'123' --> [1,2,3]
         $subArr = [];
         $num = [];
 
@@ -58,6 +58,23 @@ class Solution {
         return max($num);
     }
 }
+/**
+ * $index = array_search('a', [a,b,r,t]) ,则返回位置索引0
+ *
+ *
+ *  $arr = [1,2,3];
+    $x = array_slice($arr, 0, 1);
+    var_dump($x, $arr); // [1] [1,2,3]
+ *
+    echo "---分割线\n";
+ *
+    $x = array_splice($arr, 0, 1);
+    var_dump($x, $arr); // [1]  [2,3]
+ *
+ * 结论：
+ *      array_slice 是值传递
+ *      array_splice 是引用传值
+ */
 
 
 
