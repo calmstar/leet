@@ -8,6 +8,9 @@
 
 
 /**
+ * 归并思想资料：
+ * https://www.bilibili.com/video/av9982752?from=search&seid=3884740761769544570
+ *
  * 归并排序主程序
  * @param $arr
  * @return array
@@ -22,14 +25,14 @@ function mergeSort($arr) {
     $mid = intval($len / 2); // 取数组中间
     $left = array_slice($arr, 0, $mid); // 拆分数组0-mid这部分给左边left. 左开右闭
     $right = array_slice($arr, $mid); // 拆分数组mid-末尾这部分给右边right
-    $left = mergeSort($left); // 左边拆分完后开始递归合并往上走
-    $right = mergeSort($right); // 右边拆分完毕开始递归往上走
-    $arr = merge($left, $right); // 合并两个数组,继续递归
+    $left = mergeSort($left); // 左边拆分完后开始分治，直到出口
+    $right = mergeSort($right); // 右边拆分完毕开始分治，直到出口
+    $arr = merge($left, $right); // 开始合并两个数组
 
     return $arr;
 }
 
-// merge函数将指定的两个有序数组(arrA, arr)合并并且排序
+// merge函数将两个数组($arrA, $arrB)合并并且排序好
 // 分治+合并
 function merge($arrA, $arrB) {
     $arrC = array();
