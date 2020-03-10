@@ -47,3 +47,25 @@ function isPalindrome($x) {
 }
 
 var_dump(isPalindrome(-121));
+
+
+/**
+ * 双指针法
+ * @param $x
+ * @return bool
+ */
+function isPalindromeTwo($x) {
+    $len = strlen($x);
+    if ($len < 2) return true;
+    $halfLen = intval($len/2); // 向下取整
+    $x = (string)$x;
+    for ($i = 0; $i < $halfLen; $i++) {
+        if ($x[$i] != $x[$len-$i-1]) {
+            return false;
+        }
+    }
+    return true;
+}
+$a = -121;
+$res = isPalindromeTwo($a);
+var_dump($res);
