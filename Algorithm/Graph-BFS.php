@@ -111,6 +111,7 @@ array(6) {
 $p = $paraent;
 $end = 'F'; // 终点为F
 $way = $end . ' <- ';
+// 当 $p[$end] 为空时，说明到了起点。
 while (!empty($p[$end])) {
     $way .= $p[$end] . ' <- ';
     $end = $p[$end];
