@@ -135,7 +135,7 @@ interface Factory {
 }
 class FactoryMysql implements Factory
 {
-    public static  function createDB()
+    public static  function createDB() -- 视频讲述有误，继承的方法不能修饰为静态方法
     {
         return new DBMysql();
     }
