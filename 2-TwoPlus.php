@@ -37,35 +37,49 @@ class Solution {
     function addTwoNumbers($l1, $l2) {
         $t = $l1;
         $k = 0;
-
         do{
-
             $val = $t->val + $l2->val + $k;
-
             $t->val = $val % 10;
-
             $k = $val >= 10 ? 1 : 0;
-
             if (!$l2->next && !$t->next && $k) {
                 $t->next = new ListNode(1);
                 break;
             }
-
             if ($t->next && !$l2->next) {
                 $l2->next = new ListNode(0);
             }
-
-
             if ($l2->next && !$t->next) {
                 $t->next = new ListNode(0);
             }
-
             $t = $t->next;
-
             $l2 = $l2->next;
-
         }while ($t);
+        return $l1;
+    }
 
+
+    function addTwoNumbersV2($l1, $l2) {
+        $otherL1 = $l1;
+        $k = 0; // 进位
+        while ($otherL1 || $l2) {
+            $val = $otherL1->val + $l2->val + $k;
+            $otherL1->val = $val % 10; // $otherL1的值更新也会使得$l1的值也更新
+            $k = $val >= 10 ? 1 : 0;
+
+            if ($otherL1->next && !$l2->next) {
+                $l2->next = new ListNode(0);
+            }
+            if (!$otherL1->next && $l2->next) {
+                $otherL1->next = new ListNode(0);
+            }
+            if (!$otherL1->next && !$l2->next && $k) {
+                $otherL1->next = new ListNode(0);
+                $l2->next = new ListNode(0);
+            }
+
+            $otherL1 = $otherL1->next;
+            $l2 = $l2->next;
+        }
         return $l1;
     }
 }
