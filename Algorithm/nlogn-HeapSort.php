@@ -25,6 +25,19 @@
  */
 function heapSort ($arr)
 {
+    /**
+     * 初始化堆的复杂度为O(n)：
+     *      对于每个非叶子结点，都要调用buildHeap，将它与它的孩子结点进行比较和交换，顺序是从后向前。
+     *      buildHeap方法
+     *
+     * 调整堆的复杂度为O(n*log n)
+     *         heapSort：每次从堆顶拿走一个节点，然后将堆尾元素放到堆顶再进行堆化。
+     *                  分析：共需要拿走 n 个节点；
+     *                      每拿走一个节点需要堆化，操作的时间复杂度 logN，即跟该节点所在的高度有关
+     *                  所以：调整n个节点为 O(N logN)
+     *
+     * 所以，总体复杂度为O(n*log n)
+     */
     // 需要结合heap本身的结构写，所以查看 DataStructure/Heap.php 下的 heapSort 方法；
     return $arr;
 }
